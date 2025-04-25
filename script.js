@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerSCore = 0;
-
 
 function getComputerChoice() {
     let randomDecimal = Math.random() * 100;
@@ -24,7 +21,23 @@ function getHumanChoice() {
     
 }
 
-function playRound(humanChoice, computerChoice) {
-    let humanChoice = getHumanChoice().toLowerCase();
-    let computerChoice = getComputerChoice().toLowerCase();
+
+function playGame() {
+    let humanScore = 0;
+    let computerSCore = 0;
+
+    // TODO
+    function playRound(humanChoice, computerChoice) {
+        humanChoice = humanChoice.toLowerCase();
+        computerChoice = computerChoice.toLowerCase();
+
+        
+    }
+
+    for (let i = 1; i <= 5; i++) {
+        playRound()
+        console.log(i);
+    }
 }
+
+playGame();
