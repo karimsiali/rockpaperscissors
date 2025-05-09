@@ -24,23 +24,30 @@ function getHumanChoice() {
 function playGame() {
     let humanScore = 0;
     let computerSCore = 0;
+    let result = document.querySelector("#result");
+    let playerField = document.querySelector("#player");
+    let computerField = document.querySelector("#pc");
 
     function increment(winner, humanChoice, computerChoice) {
         if (winner == "human") {
-            console.log(`You win, ${humanChoice} beats ${computerChoice}`);
+            result.textContent = `You win, ${humanChoice} beats ${computerChoice}`;
             humanScore++;
+            playerField.textContent = +(playerField.textContent) + 1;
         } else {
-            console.log(`You lose, ${computerChoice} beats ${humanChoice}`);
+            result.textContent = `You lose, ${computerChoice} beats ${humanChoice}`;
             computerSCore++;
+            computerField.textContent = +(computerField.textContent) + 1;
         }
     }
     
     function playRound(humanChoice, computerChoice) {
         humanChoice = humanChoice.toLowerCase();
         computerChoice = computerChoice;
+
+        
         
         if (humanChoice === computerChoice) {
-            console.log("It's a tie");
+            result.textContent = "It's a tie";
         } else if (humanChoice === "rock" && computerChoice === "paper") {
             increment("computer", "rock", "paper");
         } else if (humanChoice === "paper" && computerChoice === "rock") {
@@ -55,10 +62,19 @@ function playGame() {
             increment("human", "scissors", "paper");
         }
     }
-
+    /*
     for (let i = 1; i <= 5; i++) {
         playRound(getHumanChoice(), getComputerChoice())
-    }
+    }*/
+
+    
+    let choices = document.querySelector("#choices");
+
+    choices.childNodes.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            playRound(e.target.id, getComputerChoice());
+        })
+    })
 
     let gameWinner;
     if (humanScore > computerSCore) {
@@ -69,8 +85,9 @@ function playGame() {
         gameWinner = "Nobody, it's a tie";
     }
 
-    console.log("The winner is: " + gameWinner)
+
     
 }
+
 
 playGame();
