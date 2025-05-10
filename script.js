@@ -1,14 +1,13 @@
-
+let choices = document.querySelector("#choices");
 let result = document.querySelector("#result");
 let playerScoreField = document.querySelector("#player");
 let computerScoreField = document.querySelector("#pc");
 let winnerAnnounce = document.querySelector("#announce");
+let restart = document.querySelector("#restart");
 
 
 function getComputerChoice() {
-    let randomDecimal = Math.random() * 100;
-
-    let random = Math.trunc(randomDecimal);
+    let random = Math.random() * 100;
 
     if (random <= 33) {
         return "rock";
@@ -17,17 +16,22 @@ function getComputerChoice() {
     } else {
         return "scissors";
     }
-
 }
 
 function reset () {
-    playerScoreField.textContent = "0";
-    computerScoreField.textContent = "0";
+    choices.style.display = "none";
+    restart.addEventListener("click", () => {
+        result.textContent = "";
+        winnerAnnounce.textContent = "";
+        playerScoreField.textContent = "0";
+        computerScoreField.textContent = "0";
+        choices.style.display = "block";
+    })    
 }
 
 
 function playGame() {
-
+    
     function increment(winner, humanChoice, computerChoice) {
         if (winner == "human") {
             result.textContent = `You win, ${humanChoice} beats ${computerChoice}`;
@@ -48,7 +52,7 @@ function playGame() {
         }
     }
     
-    function playRound(humanChoice, computerChoice) {      
+    function playRound(humanChoice, computerChoice) {
     
         if (humanChoice === computerChoice) {
             result.textContent = "It's a tie";
@@ -64,13 +68,9 @@ function playGame() {
             increment("computer", "paper", "scissors");
         } else {
             increment("human", "scissors", "paper");
-        }
-        
+        }        
     }
 
-
-    
-    let choices = document.querySelector("#choices");
 
     choices.childNodes.forEach((button) => {
         button.addEventListener("click", (e) => {            
@@ -79,6 +79,5 @@ function playGame() {
     })
     
 }
-
 
 playGame();
