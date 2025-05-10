@@ -1,4 +1,10 @@
 
+let result = document.querySelector("#result");
+let playerScoreField = document.querySelector("#player");
+let computerScoreField = document.querySelector("#pc");
+let winnerAnnounce = document.querySelector("#announce");
+
+
 function getComputerChoice() {
     let randomDecimal = Math.random() * 100;
 
@@ -14,38 +20,36 @@ function getComputerChoice() {
 
 }
 
-function getHumanChoice() {
-    
-    let choice = prompt("Take your pick: ");
-    return choice.toLocaleLowerCase();    
+function reset () {
+    playerScoreField.textContent = "0";
+    computerScoreField.textContent = "0";
 }
 
 
 function playGame() {
-    let humanScore = 0;
-    let computerSCore = 0;
-    let result = document.querySelector("#result");
-    let playerField = document.querySelector("#player");
-    let computerField = document.querySelector("#pc");
 
     function increment(winner, humanChoice, computerChoice) {
         if (winner == "human") {
             result.textContent = `You win, ${humanChoice} beats ${computerChoice}`;
-            humanScore++;
-            playerField.textContent = +(playerField.textContent) + 1;
+
+            playerScoreField.textContent = +(playerScoreField.textContent) + 1;
+            if (playerScoreField.textContent == 5) {
+                winnerAnnounce.textContent = "Congrats! You won."
+                reset();
+            }
         } else {
             result.textContent = `You lose, ${computerChoice} beats ${humanChoice}`;
-            computerSCore++;
-            computerField.textContent = +(computerField.textContent) + 1;
+
+            computerScoreField.textContent = +(computerScoreField.textContent) + 1;
+            if (computerScoreField.textContent == 5) {
+                winnerAnnounce.textContent = "You lost! Try again."
+                reset();
+            }
         }
     }
     
-    function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toLowerCase();
-        computerChoice = computerChoice;
-
-        
-        
+    function playRound(humanChoice, computerChoice) {      
+    
         if (humanChoice === computerChoice) {
             result.textContent = "It's a tie";
         } else if (humanChoice === "rock" && computerChoice === "paper") {
@@ -61,31 +65,18 @@ function playGame() {
         } else {
             increment("human", "scissors", "paper");
         }
+        
     }
-    /*
-    for (let i = 1; i <= 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice())
-    }*/
+
 
     
     let choices = document.querySelector("#choices");
 
     choices.childNodes.forEach((button) => {
-        button.addEventListener("click", (e) => {
-            playRound(e.target.id, getComputerChoice());
+        button.addEventListener("click", (e) => {            
+            playRound(e.target.id, getComputerChoice());            
         })
     })
-
-    let gameWinner;
-    if (humanScore > computerSCore) {
-        gameWinner = "The Player";
-    } else if (computerSCore > humanScore) {
-        gameWinner = "Computer";
-    } else {
-        gameWinner = "Nobody, it's a tie";
-    }
-
-
     
 }
 
