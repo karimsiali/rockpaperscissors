@@ -7,21 +7,26 @@
     <title>Rock Paper Scissors game</title>
 </head>
 <body>
+
+    <div id="display">
+        <h3>Score:</h3>
+        <div class="scoreboard">
+            <p>Player: <span id="player">0</span></p>
+            <p>Computer: <span id="pc">0</span></p>
+        </div>
+    </div>
+
+    <p id="result"></p>
+    
     <div id="choices">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
     </div>
-    <div id="display">
-        <p id="result"></p>
-        <h3>Score:</h3>
-        <p>Player: <span id="player">0</span></p>
-        <p>Computer: <span id="pc">0</span></p>
-        <div id="reset">
-            <p id="announce"></p>
-            <button id="restart">Restart</button>
-        </div>
-        
+
+    <div id="reset">
+        <p id="announce"></p>
+        <button id="restart">Restart</button>
     </div>
     
     <script src="./script.js"></script>

@@ -26,33 +26,38 @@ function reset () {
         playerScoreField.textContent = "0";
         computerScoreField.textContent = "0";
         choices.style.display = "block";
-    })    
+        restart.style.display = "none";
+    })
 }
 
 
 function playGame() {
     
     function increment(winner, humanChoice, computerChoice) {
+        
         if (winner == "human") {
             result.textContent = `You win, ${humanChoice} beats ${computerChoice}`;
-
+            
             playerScoreField.textContent = +(playerScoreField.textContent) + 1;
             if (playerScoreField.textContent == 5) {
                 winnerAnnounce.textContent = "Congrats! You won."
+                restart.style.display = "block";
                 reset();
             }
         } else {
             result.textContent = `You lose, ${computerChoice} beats ${humanChoice}`;
-
+            
             computerScoreField.textContent = +(computerScoreField.textContent) + 1;
             if (computerScoreField.textContent == 5) {
                 winnerAnnounce.textContent = "You lost! Try again."
+                restart.style.display = "block";
                 reset();
             }
         }
     }
     
     function playRound(humanChoice, computerChoice) {
+        restart.style.display = "none";
     
         if (humanChoice === computerChoice) {
             result.textContent = "It's a tie";
