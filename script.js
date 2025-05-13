@@ -21,11 +21,13 @@ function getComputerChoice() {
 function reset () {
     choices.style.display = "none";
     restart.addEventListener("click", () => {
+        
         result.textContent = "";
+        result.style.display = "block";
         winnerAnnounce.textContent = "";
         playerScoreField.textContent = "0";
         computerScoreField.textContent = "0";
-        choices.style.display = "block";
+        choices.style.display = "flex";
         restart.style.display = "none";
     })
 }
@@ -36,21 +38,25 @@ function playGame() {
     function increment(winner, humanChoice, computerChoice) {
         
         if (winner == "human") {
-            result.textContent = `You win, ${humanChoice} beats ${computerChoice}`;
+            result.textContent = `You win, ${humanChoice} beats ${computerChoice}!`;
             
             playerScoreField.textContent = +(playerScoreField.textContent) + 1;
             if (playerScoreField.textContent == 5) {
+                result.style.display = "none";
+                winnerAnnounce.style.color = "green";
                 winnerAnnounce.textContent = "Congrats! You won."
-                restart.style.display = "block";
+                restart.style.display = "flex";
                 reset();
             }
         } else {
-            result.textContent = `You lose, ${computerChoice} beats ${humanChoice}`;
+            result.textContent = `You lose, ${computerChoice} beats ${humanChoice}!`;
             
             computerScoreField.textContent = +(computerScoreField.textContent) + 1;
             if (computerScoreField.textContent == 5) {
+                result.style.display = "none";
+                winnerAnnounce.style.color = "red";
                 winnerAnnounce.textContent = "You lost! Try again."
-                restart.style.display = "block";
+                restart.style.display = "flex";
                 reset();
             }
         }
@@ -78,7 +84,8 @@ function playGame() {
 
 
     choices.childNodes.forEach((button) => {
-        button.addEventListener("click", (e) => {            
+        button.addEventListener("click", (e) => {
+            console.log(e.target.id)    
             playRound(e.target.id, getComputerChoice());            
         })
     })
